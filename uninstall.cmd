@@ -26,6 +26,8 @@ net stop vmware-view-usbd > NUL 2>&1
 net stop VMwareHostd > NUL 2>&1
 net stop VMAuthdService > NUL 2>&1
 net stop VMUSBArbService > NUL 2>&1
+net stop VMnetDHCP > NUL 2>&1
+net stop "VMware NAT Service" > NUL 2>&1
 taskkill /F /IM vmware-tray.exe > NUL 2>&1
 
 echo Restoring files...
@@ -42,7 +44,8 @@ net start VMUSBArbService > NUL 2>&1
 net start VMAuthdService > NUL 2>&1
 net start VMwareHostd > NUL 2>&1
 net start vmware-view-usbd > NUL 2>&1
-
+net start VMnetDHCP > NUL 2>&1
+net start "VMware NAT Service" > NUL 2>&1
 popd
 
 echo Finished!

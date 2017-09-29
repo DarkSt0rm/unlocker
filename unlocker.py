@@ -321,16 +321,16 @@ def patchbase(name):
         if flag == '\x3E':
             f.seek(offset + 32)
             f.write('\x3F')
-            print 'GOS Patched flag @: ' + hex(offset)
+            print('GOS Patched flag @: ' + hex(offset))
         else:
-            print 'GOS Unknown flag @: ' + hex(offset) + '/' + hex(int(flag))
+            print('GOS Unknown flag @: ' + hex(offset) + '/' + hex(int(flag)))
 
         offset += 33
 
     # Tidy up
     f.flush()
     f.close()
-    print 'GOS Patched: ' + name
+    print('GOS Patched: ' + name)
 
 
 def patchvmkctl(name):
