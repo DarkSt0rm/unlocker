@@ -301,14 +301,16 @@ def patchbase(name):
         '\x02\x00\x00\x00\x00\x00\x00\x00'
         '\x00\x00\x00\x00\x00\x00\x00\x00'
         '\x00\x00\x00\x00\x00\x00\x00\x00'
-        '\xBE'
+        '\x3E'
     )
 
     # Read file into string variable
     base = f.read()
 
-    # Loop thorugh each entry and set top bit
+    # Loop through each entry and set top bit
     # 0xBE --> 0xBF
+    # Updated for Workstation 14 0x3E --> 0x3F
+    # TODO: Set Shift? Check IDB with next update
     offset = 0
     while offset < len(base):
         offset = base.find(darwin, offset)
@@ -316,19 +318,19 @@ def patchbase(name):
             break
         f.seek(offset + 32)
         flag = f.read(1)
-        if flag == '\xBE':
+        if flag == '\x3E':
             f.seek(offset + 32)
-            f.write('\xBF')
-            print('GOS Patched flag @: ' + hex(offset))
+            f.write('\x3F')
+            print 'GOS Patched flag @: ' + hex(offset)
         else:
-            print('GOS Unknown flag @: ' + hex(offset) + '/' + hex(int(flag)))
+            print 'GOS Unknown flag @: ' + hex(offset) + '/' + hex(int(flag))
 
         offset += 33
 
     # Tidy up
     f.flush()
     f.close()
-    print('GOS Patched: ' + name)
+    print 'GOS Patched: ' + name
 
 
 def patchvmkctl(name):
